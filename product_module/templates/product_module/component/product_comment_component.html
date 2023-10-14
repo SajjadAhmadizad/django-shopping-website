@@ -1,0 +1,48 @@
+{% load thumbnail %}
+{% load static %}
+
+<div class="container">
+    <div class="text-danger" dir="rtl">
+        <p class="text-right" id="scroll-to-here">نظرات:</p>
+    </div>
+
+    <section style="background-color: #eee;">
+        <div id="comments-area">
+            {% if comments %}
+                {% include 'product_module/component/comments_area_component.html' %}
+            {% else %}
+                <div class="alert alert-warning"><p class="text-right">تاکنون نظری برای این محصول درج نشده است.اولین
+                    نفری باشید که نظر میدهد.</p></div>
+                <br>
+            {% endif %}
+        </div>
+
+
+        {% if request.user.is_authenticated %}
+            <div class="container" id="product-comment-form-area">
+                <div id="top-of-comment-form">
+                </div>
+                <br>
+                <br>
+                <section style="background-color: #eee;">
+                    <form action="" name="product-comment-form" id="product-comment-form" method="post" class="mt-4"
+                          dir="rtl">
+                        {% csrf_token %}
+
+                        <label for="comment" id="reply-area">نظر خود را بنویسید:</label>
+                        {{ comment_form.comment }}
+                        <input type="hidden" id="parent" name="parent" value="">
+
+                        <button type="submit" class="btn btn-primary">ثبت نظر</button>
+                    </form>
+                </section>
+            </div>
+
+        {% else %}
+            <div class="alert alert-warning container" dir="rtl">
+                <p class="text-right">برای درج نظر ابتدا <a
+                        href="{% url 'register_page' %}?next={{ product.get_absolute_url }}">وارد</a> شوید</p>
+            </div>
+        {% endif %}
+    </section>
+</div>

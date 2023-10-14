@@ -1,0 +1,123 @@
+{% load thumbnail %}
+{% load static %}
+
+{% for comment in comments %}
+
+    <div class="card mb-4">
+        <div class="card-body" id="{{ comment.id }}">
+            <div style="border: solid green 2px; padding: 20px;">
+                <div class="d-flex flex-start align-items-center" dir="rtl">
+
+                    {% if comment.user.avatar %}
+                        {% thumbnail comment.user.avatar '60x60' as im %}
+                            <img src="{% static im %}" style="border-radius: 50%;">
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="/static/assets/img/avatar/avatar_2x.png" width="60" height="60"
+                             style="border-radius: 50%;">
+                    {% endif %}
+
+                    <div>
+                        <h6 class="fw-bold text-primary mb-1 text-right">{{ comment.user }}</h6>
+                        <p class="text-muted small mb-0 text-right">تاریخ انتشار
+                            : {{ comment.jalali_create_date }}</p>
+                    </div>
+                </div>
+
+                <p class="mt-3 mb-4 pb-2 text-right">{{ comment.comment }}</p>
+
+                <div class="small d-flex justify-content-between align-items-center" dir="rtl">
+                    <div class="d-flex align-items-center">
+                        <form method="post" id="like-form-{{ comment.id }}">
+                            {% if csrf_token %}
+                                {% csrf_token %}
+                            {% else %}
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf }}">
+                            {% endif %}
+                            <a onclick="likeProductComment({{ comment.id }})" class="me-3" dir="ltr"><i
+                                    class="fa fa-thumbs-up"></i></a>
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        </form>
+                        <p class="mb-0" id="like-count-{{ comment.id }}">{{ comment.like_count }}</p>
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+                        <a onclick="replyComment('{{ comment.id }}','{{ comment.user }}')"
+                           class="d-flex align-items-center" dir="ltr">
+                            <i class="fa fa-reply me-2"></i>
+                            <p class="mb-0">پاسخ</p>
+                        </a>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.id == comment.user_id %}
+
+                            <div class="d-flex align-items-center"
+                                 onclick="deleteProductComment('{{ comment.id }}')">
+                                <p class="mb-0 alert alert-danger">حذف</p>
+                            </div>
+
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if comment.productcommentmodel_set.all %}
+        {% for answer in comment.productcommentmodel_set.all %}
+            <div class="card">
+                <div class="card-body">
+                    <div style="border: solid blue 2px; padding: 20px;">
+                        <div class="d-flex flex-start align-items-center" dir="rtl">
+                            {% if answer.user.avatar %}
+                                {% thumbnail answer.user.avatar '60x60' as im %}
+                                    <img src="{% static im %}" style="border-radius: 50%;">
+                                {% endthumbnail %}
+                            {% else %}
+                                <img src="/static/assets/img/avatar/avatar_2x.png" width="60" height="60"
+                                     style="border-radius: 50%;">
+
+                            {% endif %}
+                            <div>
+                                <h6 class="fw-bold text-primary mb-1 text-right">{{ answer.user }}</h6>
+                                <p class="text-muted small mb-0 text-right">تاریخ انتشار
+                                    : {{ answer.jalali_create_date }}</p>
+                            </div>
+                            <a href="#{{ comment.id }}"><p>در پاسخ به : {{ comment.user }}</p></a>
+                        </div>
+
+                        <p class="mt-3 mb-4 pb-2 text-right">{{ answer.comment }}</p>
+
+                        <div class="small d-flex justify-content-between align-items-center" dir="rtl">
+                            <div class="d-flex align-items-center">
+                                <form method="post" id="like-form-{{ answer.id }}">
+                                    {% if csrf_token %}
+                                        {% csrf_token %}
+                                    {% else %}
+                                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf }}">
+                                    {% endif %}
+                                    <a onclick="likeProductComment({{ answer.id }})" class="me-3" dir="ltr"><i
+                                            class="fa fa-thumbs-up"></i></a>
+                                    <input type="hidden" name="comment_id" value="{{ answer.id }}">
+                                </form>
+                                <p class="mb-0" id="like-count-{{ answer.id }}">{{ answer.like_count }}</p>
+
+                            </div>
+                            <div class="d-flex align-items-center"
+                                 onclick="deleteProductComment('{{ answer.id }}')">
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.id == answer.user_id %}
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0 alert alert-danger">حذف</p>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+</div>

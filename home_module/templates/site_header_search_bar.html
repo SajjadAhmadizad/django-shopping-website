@@ -1,0 +1,27 @@
+<div class="search-wrapper">
+    <div class="search-close" id="search-close" onclick="closeSearch()">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-content">
+                    <form name="search-bar-form" id="search-bar-form" action="" method="post">
+                        {% if csrf_token %}
+                            {% csrf_token %}
+                        {% else %}
+                            <input type="hidden" name="csrfmiddlewaretoken" value="csrf">
+                        {% endif %}
+                        <input type="search" name="product-search" id="product-search"
+                               placeholder="نام محصول مورد نظر خود را وارد کنید"
+                               data-listener-added_40944827="true">
+                        <button type="submit"><img src="/static/assets/img/core-img/search.png" alt=""></button>
+                    </form>
+                </div>
+                <div class="suggested-products" id="suggested-products" hidden>
+                    {% include 'components/site_header_search_bar_component.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

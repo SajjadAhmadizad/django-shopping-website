@@ -1,0 +1,25 @@
+
+a {
+    font-size: 20px;
+}
+
+.search-nav {
+    padding-bottom: 0;
+}
+
+.search-wrapper .search-close {
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+    line-height: 40px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #fbb710;
+}

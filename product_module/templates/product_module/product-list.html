@@ -1,0 +1,208 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    لیست محصولات
+{% endblock %}
+
+{% block content %}
+    <div class="main-content-wrapper d-flex clearfix">
+        {% include 'site_header_component.html' %}
+        <div class="shop_sidebar_area">
+            <!-- ##### Single Widget ##### -->
+            <h6 class="widget-title mb-30">دسته بندی ها</h6>
+
+
+            <div class="main-container">
+
+
+                {% for maincategory in categories %}
+                    <details class="coll-container"
+                             {% if selected_category == maincategory or selected_category.parent == maincategory %}open{% endif %}
+                             id={{ maincategory.id }}>
+                        <summary class="coll-header fa fa-plus">{{ maincategory.title }}</summary>
+                        <div class="coll-content">
+                            <div class="coll-item"><a
+                                    class="{% if selected_category == maincategory %}alert-warning{% endif %}"
+                                    href="{% url 'product_category_page' cat=maincategory.url_title %}">{{ maincategory.title }}</a>
+                            </div>
+                            {% for category in maincategory.productcategory_set.all %}
+                                <div class="coll-item"><a
+                                        {% if selected_category == category %}class="alert-warning" {% endif %}
+                                        href="{% url 'product_category_page' cat=category.url_title %}">{{ category.title }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </details>
+                {% endfor %}
+
+
+            </div>
+            <br>
+
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget brands mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">برندها</h6>
+
+                <div class="widget-desc">
+                    <!-- Single Form Check -->
+                    {% for brand in brands %}
+                        <div class="form-check" id="form-check">
+                            <input class="form-check-input"
+                                   {% if brand.url_title in brands_for_fill_checkboxes %}checked="checked"{% endif %}
+                                   type="checkbox" value="{{ brand.url_title }}" id="{{ brand.url_title }}">
+                            <label class="form-check-label" for="{{ brand.url_title }}">{{ brand.title }}</label>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+            <!-- ##### Single Widget ##### -->
+            <div class="widget price mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">قیمت</h6>
+
+                <div class="widget-desc">
+                    <div class="slider-range">
+                        <div data-min="1" data-max="{{ max_db_price }}" data-unit=""
+                             class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                             data-value-min="{{ min_value_price }}" data-value-max="{{ max_value_price }}"
+                             data-label-result="">
+                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                  style="left: 0%;"></span>
+                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                                  style="left: 100%;"></span>
+                            <div class="ui-slider-range ui-corner-all ui-widget-header"
+                                 style="left: 0%; width: 100%;"></div>
+                        </div>
+                        <div class="range-price" id="range-price">{{ min_value_price }} - {{ max_value_price }} </div>
+                    </div>
+                </div>
+                <button class="btn btn-success" id="filter-price">فیلتر قیمت</button>
+            </div>
+        </div>
+
+        <div class="pando_product_area section-padding-100">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-topbar d-xl-flex align-items-end justify-content-between">
+                            <!-- Total Products -->
+                            <div class="total-products">
+                                {% if search_text %}
+                                    <p> URL : محصولات یافت شده با عنوان و </p>
+                                    <p>{{ search_text }}</p>
+                                {% endif %}
+                                <div class="view d-flex">
+                                    <a onclick="changeList('normal')"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                                    <a onclick="changeList('list')"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <!-- Sorting -->
+                            <div class="product-sorting d-flex">
+
+
+                                {% include 'product_module/component/sort-item.html' %}
+
+
+                                <div class="view-product d-flex align-items-center">
+                                    <p>مشاهده</p>
+                                    <form action="#" id="paginate-by-form" method="get">
+                                        <select name="select" id="viewProduct">
+                                            <option value="value">2</option>
+                                            <option value="value">12</option>
+                                            <option value="value">24</option>
+                                            <option value="value">48</option>
+                                        </select>
+                                        <div class="nice-select" tabindex="0">
+                                            <span id="current" class="current">
+                                            {% if request.session.paginate_by == '2' or request.session.paginate_by == '12' or request.session.paginate_by == '24' or request.session.paginate_by == '48' %}
+                                                {{ request.session.paginate_by }}{% else %}2{% endif %}
+                                        </span>
+                                            <ul class="list">
+                                                <li data-value="value"
+                                                    class="option{% if request.session.paginate_by == '2' %} selected{% endif %}">
+                                                    2
+                                                </li>
+                                                <li data-value="value"
+                                                    class="option{% if request.session.paginate_by == '12' %} selected{% endif %}">
+                                                    12
+                                                </li>
+                                                <li data-value="value"
+                                                    class="option{% if request.session.paginate_by == '24' %} selected{% endif %}">
+                                                    24
+                                                </li>
+                                                <li data-value="value"
+                                                    class="option{% if request.session.paginate_by == '48' %} selected{% endif %}">
+                                                    48
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Single Product Area -->
+                {% if  product_list %}
+                    {% if display == 'normal' %}
+                        {% include 'product_module/component/normal-list.html' %}
+                    {% else %}
+                        {% include 'product_module/component/list-display.html' %}
+                    {% endif %}
+
+                {% elif request.GET.max_price or request.GET.min_price %}
+                    <p class="alert alert-warning ">محصولی مطابق با فیلترهای انجام شده یافت نشد!</p>
+                {% else %}
+                    <p class="alert alert-warning">محصولی یافت نشد!</p>
+                {% endif %}
+
+
+
+
+                <form method="get" id="change-url">
+                    <input type="hidden" name="list-display" value="{{ display }}" id="product-display">
+                    <input type="hidden" name="page" value="{{ page_obj.number }}" id="page">
+                    <input type="hidden" name="paginate_by" value="{% if request.session.paginate_by %}{{ request.session.paginate_by }}{% else %}'2'{% endif %}"id="paginate_by">
+                    <input type="hidden" name="brands" value="{{ brands_for_fill_checkboxes }}" id="brand_value">
+                    <input type="hidden" name="order_by" value="{% if request.GET.order_by %}{{ request.GET.order_by }}{% else %}تاریخ{% endif %}" id="order_by">
+                    <input type="hidden" name="max_price" value="{{ max_value_price }}" id="max_price">
+                    <input type="hidden" name="min_price" value="{{ min_value_price }}" id="min_price">
+                    <input type="hidden" name="q" value="{{ search_text }}" id="search_text">
+                </form>
+
+
+                <div class="row">
+                    <div class="col-12">
+
+
+                        <!-- Pagination -->
+                        <nav aria-label="navigation">
+                            <ul class="pagination justify-content-end mt-50 dir float-right">
+                                {% for pageNumber in paginator.page_range %}
+                                    <li class="page-item {% if pageNumber == page_obj.number %} active {% endif %} ">
+                                        <a onclick="fillPage({{ pageNumber }})" class="page-link">{{ pageNumber }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/assets/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/static/assets/js/bootstrap.min.js"></script>
+{% endblock %}

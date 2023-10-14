@@ -1,0 +1,74 @@
+{% load static %}
+<div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="cart-title mt-50">
+            <h2>سبد خرید فروشگاه</h2>
+        </div>
+
+        <div class="cart-table clearfix">
+            <table class="table table-responsive" tabindex="1" style="overflow: hidden; outline: none;">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>نام</th>
+                    <th>قیمت</th>
+                    <th>تعداد</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for order_items in order.orderitems_set.all %}
+                    <tr>
+                        <td class="cart_product_img">
+                            <a href="{% url 'product_detail_page' slug=order_items.product.slug %}"><img
+                                    src={% static order_items.product.image %}></a>
+                        </td>
+                        <td class="cart_product_desc">
+                            <a href="{% url 'product_detail_page' slug=order_items.product.slug %}">
+                                <h5>{{ order_items.product.title }}</h5></a>
+                        </td>
+                        <td class="price">
+                            <span>{{ order_items.product.price }}</span>
+                        </td>
+                        <td class="qty">
+                            <div class="qty-btn d-flex">
+                                <p>تعداد</p>
+                                <div class="quantity">
+                                    <span class="qty-minus"
+                                            onclick="addOrderItemCount('{{ order_items.id }}','decrease')"><i
+                                            class="fa fa-minus" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="number" class="qty-text" id="{{ order_items.id }}" step="1" min="1"
+                                           max="300" name="quantity" value="{{ order_items.count }}">
+                                    <span class="qty-plus"
+                                          onclick="addOrderItemCount('{{ order_items.id }}','increase')"><i
+                                          class="fa fa-plus" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="qty"
+                                          onclick="deleteOrderItemCount('{{ order_items.id }}')"><i
+                                          class="fa fa-times-circle" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="cart-summary">
+            <h5>مجموع سبد خرید</h5>
+            <ul class="summary-table">
+                <li><span>مجموع:</span> <span>{{ order.calculate_total_price }}</span></li>
+                <li><span>ارسال:</span> <span>رایگان</span></li>
+                <li><span>جمع پرداخت:</span> <span>{{ order.calculate_total_price }}</span></li>
+            </ul>
+            <div class="cart-btn mt-100">
+                <a href="checkout.html" class="btn amado-btn w-100">تسویه حساب</a>
+            </div>
+        </div>
+    </div>
+</div>

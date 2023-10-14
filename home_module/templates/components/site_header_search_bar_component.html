@@ -1,0 +1,30 @@
+{% load static %}
+{% load thumbnail %}
+<link rel="stylesheet" href="/static/assets/css/font-iransans.css">
+<div class="col-md-9 text-right float-right" id="founded-products-area">
+    <ul class="list-group">
+        {% for founded_product in founded_products %}
+            <li class="list-group-item form-control">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="product-image"> {% thumbnail founded_product.image '60x60' as im %}
+                            <img src="{% static im %}"> {% endthumbnail %} </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="product-item"><h4 class="product-title"><a
+                                href="{{ founded_product.get_absolute_url }}">{{ founded_product.title }}</a></h4>
+                            <a href="{{ founded_product.get_absolute_url }}"
+                               class="product-description d-none d-md-block">{{ founded_product.short_description|truncatechars:50 }}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        {% if count >= 4 %}
+            <li class="list-group-item">
+                <div class="load-more"><a href="{{ founded_product.get_absolute_url }}?q={{ search_text }}">نمایش موارد
+                    بیشتر...</a></div>
+            </li>
+        {% endif %}
+    </ul>
+</div>

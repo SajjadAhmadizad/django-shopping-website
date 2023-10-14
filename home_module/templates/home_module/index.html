@@ -1,0 +1,49 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    صفحه اصلی
+{% endblock %}
+
+{% block content %}
+    <!-- Search Wrapper Area Start -->
+
+    <!-- Search Wrapper Area End -->
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Header Area Start -->
+        {% include 'site_header_component.html' %}
+        <!-- Header Area End -->
+
+
+        <!-- Product Catagories Area Start -->
+        <div class="products-catagories-area clearfix">
+            <div class="pando-pro-catagory clearfix" style="position: relative; height: 2078.3px;">
+
+                <!-- Single Catagory -->
+
+                {% for product in product_list %}
+                    <div class="single-products-catagory clearfix" style="position: absolute; left: 0%; top: 0px;">
+                        <a href="{% url 'product_category_page' cat=product.category.url_title %}">
+                            <img src="{% static product.category.image %}" alt="">
+                            <!-- Hover Content -->
+                            <div class="hover-content">
+                                <div class="line"></div>
+                                <p>از {{ product.cheapest_product.price }} تومان</p>
+                                <h4>{{ product.category.title }}</h4>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+        <!-- Product Catagories Area End -->
+    </div>
+
+{% endblock %}
+
+

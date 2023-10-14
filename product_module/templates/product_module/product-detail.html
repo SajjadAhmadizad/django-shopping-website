@@ -1,0 +1,172 @@
+{% extends 'shared/_layout.html' %}
+{% load static %}
+
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block content %}
+    <body>
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="pando-navbar-brand">
+                <a href="index.html"><img src="/static/assets/img/core-img/logo.png" alt=""></a>
+            </div>
+            <!-- Navbar Toggler -->
+            <div class="pando-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        {% include 'site_header_component.html' %}
+        <!-- Header Area End -->
+
+        <!-- Product Details Area Start -->
+        <div class="single-product-area section-padding-100 clearfix">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        {% if breadcrumbs %}
+                            <div class="container">
+                                {% include "dynamic_breadcrumbs/breadcrumbs.html" with breadcrumbs=breadcrumbs %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-7">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+
+                                {% for group in product_list_gallery %}
+                                    <ol class="carousel-indicators">
+                                        {% for img in group %}
+                                            <li class="" data-target="#product_details_slider"
+                                                onclick="setAsLargeImage('{% static img.image %}')"
+                                                data-slide-to="{{ forloop.parentloop.counter0 }}"
+                                                style="background-image: url({% static img.image %});">
+                                            </li>
+                                        {% endfor %}
+                                    </ol>
+                                {% endfor %}
+
+                                <div class="carousel-inner">
+                                    {% for group in product_list_gallery %}
+                                        {% for product in group %}
+                                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                <a class="gallery_img" href="{% static product.image %}">
+                                                    <img class="d-block w-100" id="lrg-img"
+                                                         src="{% static product.image %}" alt="">
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Add Left and right controls -->
+                                <a class="carousel-control-prev" href="#product_details_slider" role="button"
+                                   data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#product_details_slider" role="button"
+                                   data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="single_product_desc">
+                            <!-- Product Meta Data -->
+                            <div class="product-meta-data">
+                                <div class="line"></div>
+                                <p class="product-price">{{ product.price }}</p>
+                                <a href="single-product.html">
+                                    <h6>{{ product.title }}</h6>
+                                </a>
+                                <!-- Ratings & Review -->
+                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                                    <div class="ratings">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="review">
+                                        <a href="#">نظر خود را بنویسید</a>
+                                    </div>
+                                </div>
+                                <!-- Avaiable -->
+                                <p class="avaibility"><i class="fa fa-circle"></i> موجود</p>
+                            </div>
+
+                            <div class="short_overview my-5">
+                                <p>{{ product.description }}</p>
+                            </div>
+
+
+                            {% if request.user.is_authenticated %}
+                                <div class="" id="div-order">
+                                    <p id="count-in-order-p" class="text-danger">{% if count_in_order != 0 %}این محصول
+                                        به
+                                        تعداد <span
+                                                id="count-in-order">{{ count_in_order }}</span> عدد در سبد خرید شما
+                                        موجود
+                                        است{% endif %}</p>
+                                    <div>
+                                        <button id="delete-order-button" class="btn btn-danger"
+                                                {% if order_item %}onclick="deleteOrderItemCount({{ order_item }})"{% endif %}
+                                                type="submit" name="addtocart"
+                                                {% if count_in_order == 0 %}hidden="hidden"{% endif %}
+                                                value="5" class="btn pando-btn">حذف از سبد خرید
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <br>
+
+                            <!-- Add to Cart Form -->
+                            <form class="cart clearfix" method="post">
+                                <div class="cart-btn d-flex mb-50">
+                                    <p>تعداد</p>
+                                    <div class="quantity">
+                                        <span class="qty-minus"
+                                              onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) effect.value--;return false;"><i
+                                                class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300"
+                                               name="quantity" value="1">
+                                        <span class="qty-plus"
+                                              onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i
+                                                class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <button onclick="addProductToOrder({{ product.id }})" type="submit" name="addtocart"
+                                    value="5" class="btn pando-btn">افزودن به سبد
+                                خرید
+                            </button>
+                        </div>
+                    </div>
+
+                    {% include 'product_module/component/product_comment_component.html' %}
+
+                </div>
+            </div>
+        </div>
+        <!-- Product Details Area End -->
+    </div>
+{% endblock %}

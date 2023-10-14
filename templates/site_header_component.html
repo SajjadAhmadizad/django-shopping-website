@@ -1,0 +1,70 @@
+<!-- Mobile Nav (max width 767px)-->
+<div class="mobile-nav">
+    <!-- Navbar Brand -->
+    <div class="pando-navbar-brand">
+        <a href="index.html"><img src="/static/assets/img/core-img/logo.png" alt=""></a>
+    </div>
+    <!-- Navbar Toggler -->
+    <div class="pando-navbar-toggler">
+        <span></span><span></span><span></span>
+    </div>
+</div>
+
+<header class="header-area clearfix">
+    <!-- Close Icon -->
+    <div class="nav-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <!-- Logo -->
+    <div class="logo">
+        <a href="index.html"><img src="/static/assets/img/core-img/logo.png" alt=""></a>
+    </div>
+    <!-- Pando Nav -->
+    <nav class="pando-nav">
+        <ul>
+            <li class="{% if request.resolver_match.url_name == 'home_page' %}active{% endif %}"><a
+                    href="{% url 'home_page' %}">صفحه نخست</a></li>
+            <li class="{% if request.resolver_match.url_name == 'product_list_page' %}active{% endif %}"><a
+                    href={% url 'product_list_page' %}>فروشگاه</a></li>
+            <li><a href="#">درباره ما</a></li>
+            <li class="{% if request.resolver_match.url_name == 'contact_us_page' %}active{% endif %}"><a
+                    href="{% url 'contact_us_page' %}">تماس
+                با ما</a></li>
+            <li class="{% if request.resolver_match.url_name == 'orders_list_page' %}active{% endif %}"><a
+                    href="{% url 'orders_list_page' %}">سبد خرید</a></li>
+            <li><a onclick="soon('checkOut')">تسویه حساب</a></li>
+            <li><a href="{% url 'user_dashboard_page' %}">حساب کاربری</a></li>
+        </ul>
+    </nav>
+    <!-- Button Group -->
+    <div class="pando-btn-group mt-30 mb-100">
+        <a href="{% url 'product_list_page' %}?order-by=تاریخ" class="btn pando-btn active">جدیدترین محصولات</a>
+    </div>
+    <!-- Cart Menu -->
+    <div class="cart-fav-search mb-100">
+
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'log_out_page' %}" class="login"><img src="/static/assets/img/core-img/login.png" alt="">
+                خروج از حساب
+            </a>
+            <a href="{% url 'orders_list_page' %}" class="cart-nav"><img src="/static/assets/img/core-img/cart.png"
+                                                                         alt=""> سبد خرید
+            </a>
+        {% else %}
+            <a href="{% url 'register_page' %}" class="login"><img src="/static/assets/img/core-img/login.png" alt="">
+                ورود
+                - ثبت نام</a>
+        {% endif %}
+
+        <a href="#" class="search-nav" onclick="closeSearch()"><img src="/static/assets/img/core-img/search.png" alt="">
+            جستجو</a>
+    </div>
+    <!-- Social Button -->
+    <div class="social-info d-flex justify-content-between">
+        <a href="https://pinterest.com" target="_blank"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+        <a href="https://instagram.com/sajjad_ahmadizad" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href="https://twitter/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <a href="https://t.me/Sajjad_a_b" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+    </div>
+</header>

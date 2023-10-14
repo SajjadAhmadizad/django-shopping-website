@@ -1,0 +1,47 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}
+    تماس باما
+{% endblock %}
+{% block header_deferences %}
+    <link rel="stylesheet" href="/static/assets/css/contact-us.css">
+    <link rel="stylesheet" href="/static/assets/fonts/IranSans/FontsFree-Net-ir_sans.ttf">
+
+{% endblock %}
+{% block content %}
+    <div class="main-content-wrapper d-flex clearfix">
+        {% include 'site_header_component.html' %}
+        <style>
+
+        </style>
+
+        <div class="cart-table-area section-padding-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- فرم تماس -->
+                        <div class="contact-form" >
+                            <h4 class="rtl" >فرم تماس</h4>
+
+                            {% include 'contact_module/components/contact-us-form-component.html' %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <!-- اطلاعات تماس -->
+                    <hr>
+                    <div class="contact-info">
+                        <h3>تماس با ما</h3>
+                        <p>شماره تماس: {{ phone }}</p>
+                        <p>آدرس: {{ address }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

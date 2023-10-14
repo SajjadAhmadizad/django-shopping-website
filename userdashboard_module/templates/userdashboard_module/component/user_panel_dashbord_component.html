@@ -1,0 +1,25 @@
+{% load static %}
+{% load thumbnail %}
+
+<div class="col-sm-3"><!--left col-->
+    <div class="text-center">
+
+        {% thumbnail user.avatar '200x200' as im %}
+        <img src="{% static im %}" style="border-radius: 50%;">
+        {% endthumbnail %}
+
+    </div>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong><a href="/user-dashboard/">اطلاعات حساب کاربری</a></strong></span>
+        </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong dir="rtl"><a
+                href="{% url 'orders_page' %}">لیست خرید های قبلی</a></strong></span>
+        </li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong dir="rtl"><a
+                href="{% url 'product_list_page' %}">بازگشت به صفحه محصولات</a></strong></span>
+        </li>
+    </ul>
+
+</div>

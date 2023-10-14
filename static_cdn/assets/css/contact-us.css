@@ -1,0 +1,59 @@
+.contact-form {
+    background-color: #f8f8f8;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.contact-form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.contact-form textarea {
+    height: 120px;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+/* استایل بخش اطلاعات تماس */
+.contact-info {
+    margin-top: 30px;
+}
+
+.contact-info h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.rtl {
+    float: right;
+    margin-right: 10px;
+}
+.contact-info{
+    text-align: center;
+}

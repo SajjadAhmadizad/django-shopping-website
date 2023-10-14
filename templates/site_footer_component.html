@@ -1,0 +1,78 @@
+<section class="newsletter-area section-padding-100-0">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Newsletter Text -->
+            <div class="col-12 col-lg-6 col-xl-7">
+                <div class="newsletter-text mb-100">
+                    <h2>عضویت در خبرنامه و کد تخفیف <span>25 درصدی </span></h2>
+                    <p>بلافاصله پس از عضویت در خبرنامه یک کد تخفیف بیست و پنج درصدی به ایمیل شما ارسال خواهد شد که
+                        می‌توانید در خرید اول خود از آن استفاده کنید.</p>
+                </div>
+            </div>
+            <!-- Newsletter Form -->
+            <div class="col-12 col-lg-6 col-xl-5">
+                <div class="newsletter-form mb-100">
+                    <form action="#" method="post">
+                        <input type="email" name="email" class="nl-email" placeholder="ایمیل شما">
+                        <input type="submit" value="اشتراک">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer_area clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-4">
+                <div class="single_widget_area">
+                    <!-- Logo -->
+                    <div class="footer-logo mr-50">
+                        <a href="index.html"><img src="/static/assets/img/core-img/logo2.png" alt=""></a>
+                    </div>
+                    <!-- Copywrite Text -->
+                    <p class="copywrite">
+                        <!-- Link back to sitranet can't be removed. -->
+                        کپی رایت ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        <p>تمامی حقوق محفوظ است - {{ copy_right }}</p>
+                    <p>این سایت توسط سجاد احمدی زاد با جنگو کدنویسی شده است</p>
+                    </p>
+                </div>
+            </div>
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-8">
+                <div class="single_widget_area">
+                    <!-- Footer Menu -->
+                    <div class="footer_menu">
+                        <nav class="navbar navbar-expand-lg justify-content-end">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#footerNavContent" aria-controls="footerNavContent"
+                                    aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i>
+                            </button>
+                            <div class="collapse navbar-collapse" id="footerNavContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{% url 'home_page' %}">صفحه نخست</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="">درباره ما</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'contact_us_page' %}">تماس با ما</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">قوانین و مقررات</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

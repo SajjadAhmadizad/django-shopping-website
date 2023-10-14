@@ -1,0 +1,26 @@
+<form action="#" class="login" id="login-form" name="login" method="post">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% endif %}">
+    <div class="field rtl">
+        {{ login_form.email }}
+    </div>
+    <div class="pass-link">
+        {% for error in login_form.email.errors %}
+            <p class="text-danger error-message" >{{ error }}</p>
+        {% endfor %}
+    </div>
+    <div class="field rtl">
+        {{ login_form.password }}
+    </div>
+    <div class="pass-link">
+        {% for error in login_form.password.errors %}
+            <p class="text-danger error-message">{{ error }}</p>
+        {% endfor %}
+    </div>
+    <div class="pass-link rtl"><a href="{% url 'forgot_password_view' %}">رمز عبور خود را فراموش کرده اید؟</a></div>
+    <div class="field btn">
+        <div class="btn-layer"></div>
+        <input type="submit" value='ورود'>
+    </div>
+    <div class="signup-link">اکانتی ندارید؟ <a href="">هم اکنون ثبت نام کنید</a></div>
+</form>

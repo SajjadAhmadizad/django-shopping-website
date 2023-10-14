@@ -1,0 +1,180 @@
+{% load render_partial %}
+{% load thumbnail %}
+{% load static %}
+
+<!------ Include the above in your HEAD tag ---------->
+
+{#<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">#}
+{#<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>#}
+{#<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/assets/js/custom.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="/static/assets/js/jquery/jquery-2.2.4.min.js"></script>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+
+<hr>
+<div class="container bootstrap snippet" style="font-size: 16px">
+    <div class="row">
+        <div class="col-sm-12 text-center"><h1>اطلاعات حساب کاربری</h1></div>
+    </div>
+    <div class="row">
+        {% include 'userdashboard_module/component/user_panel_dashbord_component.html' %}
+
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="{% if active_item == 'information-form' %}active{% endif %}"><a data-toggle="tab"
+                                                                                           href="#changeinfo">تغییر
+                    اطلاعات حساب</a></li>
+                <li><a class="{% if active_item == 'password-form' %}active{% endif %}" data-toggle="tab"
+                       href="#changepass">تغییر کلمه عبور</a></li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane {% if active_item == 'information-form' %}active{% endif %}" id="changeinfo">
+                    <hr>
+                    <form class="form" name="registrationForm" method="post" id="registrationForm"
+                          style="text-align: right;" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="form" value="user-information-form">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                {{ form1.first_name.label }}
+                                {{ form1.first_name }}
+                                {% for error in form1.first_name.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                {{ form1.last_name.label }}
+                                {{ form1.last_name }}
+                                {% for error in form1.last_name.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                {{ form1.username.label }}
+                                {{ form1.username }}
+                                {% for error in form1.username.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                {{ form1.avatar.label }}
+                                {{ form1.avatar }}
+                                {% for error in form1.avatar.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6" style="float: right">
+                                {{ form1.address.label }}
+                                {{ form1.address }}
+                                {% for error in form1.address.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6" style="float: right">
+                                {{ form1.about_user.label }}
+                                {{ form1.about_user }}
+                                {% for error in form1.about_user.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i
+                                        class="glyphicon glyphicon-ok-sign"></i> ذخیره
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+                <div class="tab-pane {% if active_item == 'password-form' %}active{% endif %}" id="changepass">
+
+                    {#                    {% render_partial 'userdashboard_module.views.ChangePasswordPartialView' %}#}
+                    <form class="form" method="post" id="registrationForm" style="text-align: right;">
+                        {% csrf_token %}
+                        <input type="hidden" name="form" value="password-form">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                {{ change_password_form.current_password.label }}
+                                {{ change_password_form.current_password }}
+                                {% for error in change_password_form.current_password.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="col-xs-12">
+                                {{ change_password_form.new_password.label }}
+                                {{ change_password_form.new_password }}
+                                {% for error in change_password_form.new_password.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="col-xs-12">
+                                {{ change_password_form.confirm_new_password.label }}
+                                {{ change_password_form.confirm_new_password }}
+                                {% for error in change_password_form.confirm_new_password.errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <br>
+                            <a onclick="forgotPasswordLoggedInUser()">کلمه عبور فعلی خود را فراموش کرده اید؟برای ارسال
+                                ایمیل بازیابی کلیک کنید</a>
+                            <br>
+                            <br>
+                            <button class="btn btn-lg btn-success" type="submit"><i
+                                    class="glyphicon glyphicon-ok-sign"></i> تغییر کلمه عبور
+                            </button>
+                        </div>
+                    </form>
+
+                </div><!--/tab-pane-->
+
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+
+    </div><!--/col-9-->
+</div><!--/row-->

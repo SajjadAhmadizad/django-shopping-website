@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Iransans';
+    src: url('/static/assets/fonts/IranSans/FontsFree-Net-ir_sans.ttf') format('truetype');
+}
+
+body {
+    font-family: 'IranSans', sans-serif;
+}
+
+.IranSans {
+    font-size: 10rem;
+}

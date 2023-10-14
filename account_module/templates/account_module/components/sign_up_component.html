@@ -1,0 +1,27 @@
+<form action="#" class="signup" id="register-form" name="register-form">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token2 }}">
+    <div class="field rtl">
+        {{ register_form.email }}
+    </div>
+    <div class="pass-link rtl">
+        {% for error in register_form.email.errors %}
+            <p class="text-danger error-message">{{ error }}</p>
+        {% endfor %}
+    </div>
+    <div class="field rtl">
+        {{ register_form.password }}
+    </div>
+    <div class="pass-link rtl">
+        {% for error in register_form.password.errors %}
+            <p class="text-danger error-message">{{ error }}</p>
+        {% endfor %}
+    </div>
+    <div class="field rtl">
+        {{ register_form.confirm_password }}
+    </div>
+
+    <div class="field btn">
+        <div class="btn-layer"></div>
+        <input type="submit" value="ثبت نام">
+    </div>
+</form>

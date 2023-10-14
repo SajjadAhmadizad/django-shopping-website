@@ -1,0 +1,27 @@
+<div class="sort-by-date d-flex align-items-center mr-15">
+    <p>ترتیب بندی</p>
+    <form action="#" method="get" id="order-by-b">
+        <select name="select" id="sortBydate" style="display: none;">
+            <option value="value">تاریخ</option>
+            <option value="value">گران ترین</option>
+            <option value="value">ارزان ترین</option>
+            <option value="value">پربازدید ترین</option>
+        </select>
+        <div class="nice-select" tabindex="0">
+            <span id="order-by" class="current">
+                {% if selected_order_by %}
+                    {{ selected_order_by }}{% else %}تاریخ{% endif %}
+            </span>
+            <ul class="list">
+                <li data-value="value"
+                    class="option {% if selected_order_by == 'تاریخ' %}selected{% endif %}">تاریخ</li>
+                <li data-value="value"
+                    class="option {% if selected_order_by == 'گران ترین' %}selected{% endif %}">گران ترین</li>
+                <li data-value="value"
+                    class="option {% if selected_order_by == 'ارزان ترین' %}selected{% endif %}">ارزان ترین</li>
+                <li data-value="value"
+                    class="option {% if selected_order_by == 'پربازدید ترین' %}selected{% endif %}">پربازدید ترین</li>
+            </ul>
+        </div>
+    </form>
+</div>

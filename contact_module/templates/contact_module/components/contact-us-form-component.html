@@ -1,0 +1,16 @@
+<form action="#" method="post" class="form-control" name="contact-us-form" id="contact-us-form">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    {{ form.name }}
+    {% for error in form.name.errors %}
+        <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+    {{ form.email }}
+    {% for error in form.email.errors %}
+        <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+    {{ form.message }}
+    {% for error in form.message.errors %}
+        <p class="text-danger">{{ error }}</p>
+    {% endfor %}
+    <input type="submit" value="ارسال">
+</form>

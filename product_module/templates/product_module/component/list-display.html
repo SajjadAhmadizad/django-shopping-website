@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="row product-list">
+    {% for product in product_list %}
+        <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+            <div class="single-product-wrapper">
+                <!-- Product Image -->
+                <div class="product-img">
+                    <a href="{% url 'product_detail_page' slug=product.slug %}"><img src="{% static product.image %}"
+                                                                                     alt=""></a>
+                </div>
+                <a href="{% url 'product_detail_page' slug=product.slug %}">
+                    <h6 class="dir">{{ product.title }}</h6>
+                </a>
+                <!-- Product Description -->
+                <div class="product-description d-flex align-items-center justify-content-between">
+                    <!-- Ratings & Cart -->
+                    <div class="ratings-cart text-right">
+                        <div class="ratings">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <!-- Product Meta Data -->
+                        <div class="product-meta-data">
+                            <div class="line"></div>
+                            <p class="product-price">{{ product.price }}</p>
+                        </div>
+                        {% include 'product_module/component/cart-component.html' %}
+                        <div class="short_overview my-5">
+                            <p>{{ product.short_description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>

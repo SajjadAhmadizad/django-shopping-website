@@ -1,0 +1,23 @@
+.errorlist {
+    color: #ff0000;
+}
+
+/* ####################################################
+:: Template Name: pando
+:: Author: Sitranet
+:: Author URL: https://karbarwp.com
+:: Description: Pando is smart & elegant fashion e-commerce Template. It's suitable for all e-commerce business platform.
+:: Version: 1.0.0
+:: Created: March 11, 2019
+#################################################### */
+/* ---------------------------------------
+##### - karbarwp - #####
+--------------------------------------- */
+.dir {
+    direction: rtl;
+}
+
+.float-right{
+    float: right;
+}
+
