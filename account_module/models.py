@@ -41,13 +41,10 @@ class User(AbstractUser):
             return self.email
 
     def save(self, *args, **kwargs):
-        x=self.email.index('@')
-        self.username = self.email[0:x]
+         # هنگام ذخیره کاربر جدید درصورتی که سوپریوزر نباشد مقدار یوزرنیم کاربر برابر با مقدار قبل از @ در ایمیل کاربر میشود
+         # مثلا:ahmadizadsajjad@gmail.com  => username: ahmadizadsajjad
+        if not self.is_superuser:  
+            x=self.email.index('@')
+            self.username = self.email[0:x]
         super().save(*args, **kwargs)
-
-    # def save(self, *args, **kwargs):
-    #     # تنها درصورتی که شیِ ساخته شده جدید است(ویرایش شیِ قبلی نیست(تنها درصورتی آیدی ندارد که شی جدید باشد)) براش یوزرنیم برابر با آیدی اخرین کاربر+1 درنظر بگیر
-    #     if not self.pk:
-    #         self.username = User.objects.last().id + 1
-    #     super().save(*args,**kwargs)
 
