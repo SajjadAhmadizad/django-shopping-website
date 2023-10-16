@@ -190,9 +190,6 @@ function addProductToOrder(productId) {
                     var deleteBotton = document.getElementById('delete-order-button')
                     document.getElementById('count-in-order-p').innerHTML = 'این محصول به تعداد ' + res.current_count + ' عدد در سبد خرید شما موجود است';
                     deleteBotton.hidden = false;
-                    // deleteBotton.onclick = function (){
-                    //     deleteOrderItemCount(res.order_item_id)
-                    // }
                     deleteBotton.addEventListener('click', function () {
                         deleteOrderItemCount(res.order_item_id);
                     })
@@ -263,7 +260,6 @@ function deleteOrderItemCount(orderItemsId) {
             })
 
         } else if (
-            /* Read more about handling dismissals below */
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire(
