@@ -19,5 +19,11 @@ def index(request):
                 'category': category,
                 'cheapest_product': cheapest_product
             })
-    return render(request, 'home_module/index.html',
-                  {'copy_right': site.copy_right, 'address': site.address, 'phone': site.phone, 'product_list':product_list})
+    if site is not None:
+        return render(request, 'home_module/index.html',
+                      {'copy_right': site.copy_right, 'address': site.address, 'phone': site.phone,
+                       'product_list': product_list})
+    else:
+        return render(request, 'home_module/index.html',
+                      {'copy_right': 'sajjad ahmadizad', 'address': 'sajjadahmadizad.pythonanywhere.com', 'phone': '09931355952',
+                       'product_list': product_list})
