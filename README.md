@@ -13,7 +13,7 @@ EMAIL_PORT = 587 <br/>
 ```bash
 pip install -r requ.txt
 ```
-
+ 
 ## 3-Create a sqlite database in the main project path named db.sqlite3<br/>
 ## 4-Migrate database with using the following command : 
 ```bash
@@ -31,4 +31,3 @@ python manage.py createsuperuser
 <hr>
 
 # [Telegram](https://t.me/sajjad_a_b) | [Instagram](https://instagram.com/sajjad_ahmadizad) | [LinkedIn](https://www.linkedin.com/in/ahmadizad/) 
-
