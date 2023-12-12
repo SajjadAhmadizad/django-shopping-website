@@ -7,7 +7,7 @@ class SiteModel(models.Model):
     domain_name = models.CharField(max_length=50,verbose_name='دامنه سایت')
     copy_right = models.CharField(max_length=50, verbose_name='متن کپی رایت')
     address = models.CharField(max_length=100,verbose_name='آدرس')
-    phone = models.IntegerField(verbose_name='تلفن')
+    phone = models.BigIntegerField(verbose_name='تلفن')
     email = models.EmailField(verbose_name='ایمیل')
     telegram = models.CharField(max_length=50,verbose_name="تلگرام")
     twitter = models.CharField(max_length=50,verbose_name="توئیتر")
