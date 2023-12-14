@@ -1,13 +1,6 @@
 ## [django-shopping-website](https://github.com/sajjadahmadizad)
 
 ## 1-Fill these values ​​in settings.py
-My codes on github
-....
-
-
-My Codes On Pc
-for i in range(10):
-...
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' <br/>
 EMAIL_USE_TLS = True <br/>
