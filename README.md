@@ -4,6 +4,11 @@
 My codes on github
 ....
 
+
+My Codes On Pc
+for i in range(10):
+...
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' <br/>
 EMAIL_USE_TLS = True <br/>
 EMAIL_HOST = 'smtp.gmail.com' <br/>
