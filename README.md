@@ -1,7 +1,6 @@
 ## [django-shopping-website](https://github.com/sajjadahmadizad)
 
 ## 1-Fill these values ​​in settings.py
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' <br/>
 EMAIL_USE_TLS = True <br/>
 EMAIL_HOST = 'smtp.gmail.com' <br/>
