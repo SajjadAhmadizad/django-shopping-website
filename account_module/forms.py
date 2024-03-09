@@ -57,7 +57,7 @@ class RegisterForm(forms.Form):
             raise ValidationError('این فیلد نمیتواند خالی باشد!')
 
     def clean(self):
-        cleaned_data = super().clean();
+        cleaned_data = super().clean()
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
         if password == confirm_password:
