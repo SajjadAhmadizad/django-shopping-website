@@ -6,7 +6,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' <br/>
 EMAIL_USE_TLS = True <br/>
 EMAIL_HOST = 'smtp.gmail.com' <br/>
 EMAIL_HOST_USER = 'your gmail address' <br/>
-EMAIL_HOST_PASSWORD = 'XXXX-XXXX-XXXX-XXXX' <br/>
+EMAIL_HOST_PASSWORD = 'XXXXXXXXXXXXXXXX' <br/>
 EMAIL_PORT = 587 <br/>
 
 ## 2-Then install the required libraries using the following command : 
